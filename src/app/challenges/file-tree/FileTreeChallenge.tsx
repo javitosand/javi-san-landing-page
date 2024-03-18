@@ -4,24 +4,24 @@ import React, { useState } from "react";
 
 type NodeType = {
   name: string;
-  children?: NodeType[];
+  elements?: NodeType[];
 };
 
 const files: NodeType = {
   name: "files",
-  children: [
+  elements: [
     {
       name: "src",
-      children: [
+      elements: [
         {
           name: "challenges",
-          children: [
+          elements: [
             {
               name: "FileTreeChallenge.tsx",
             },
             {
               name: "queue",
-              children: [{ name: "GroceryQueueChallenge.tsx" }],
+              elements: [{ name: "GroceryQueueChallenge.tsx" }],
             },
           ],
         },
@@ -29,14 +29,14 @@ const files: NodeType = {
     },
     {
       name: "components",
-      children: [{ name: "Bubble.tsx" }, { name: "Loading.tsx" }],
+      elements: [{ name: "Bubble.tsx" }, { name: "Loading.tsx" }],
     },
     { name: "page.tsx" },
   ],
 };
 
 export const FileTreeChallenge = () => {
-  const Node = ({ name, children, depth }: NodeType & { depth: number }) => {
+  const Node = ({ name, elements, depth }: NodeType & { depth: number }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
@@ -46,14 +46,15 @@ export const FileTreeChallenge = () => {
         }}
       >
         <button
-          className={children ? "" : "without-children"}
+          className={elements ? "" : "without-children"}
           onClick={() => setIsExpanded((expand) => !expand)}
-        >{`${children ? (!isExpanded ? " + " : " - ") : ""}${name}`}</button>
+        >{`${elements ? (!isExpanded ? " + " : " - ") : ""}${name}`}</button>
         {isExpanded
-          ? children?.map((node) => (
+          ? elements?.map((node) => (
               <Node
+                key={`node-${node.name}`}
                 name={node.name}
-                children={node.children}
+                elements={node.elements}
                 depth={depth + 1}
               />
             ))
@@ -77,8 +78,13 @@ export const FileTreeChallenge = () => {
     <div className="file-tree-layout">
       <div className="file-tree-container">
         <div className="file-wrapper">
-          {files.children?.map((file) => (
-            <Node name={file.name} children={file.children} depth={0} />
+          {files.elements?.map((file) => (
+            <Node
+              key={`file-${file.name}`}
+              name={file.name}
+              elements={file.elements}
+              depth={0}
+            />
           ))}
         </div>
       </div>

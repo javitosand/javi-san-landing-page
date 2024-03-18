@@ -17,13 +17,10 @@ export const DrawOnClick = () => {
     ]);
   };
   return (
-    <div
-      //   id="canvas"
-      className="draw-container"
-      onClick={handleClick}
-    >
-      {circles.map((circle) => (
+    <div className="draw-container" onClick={handleClick}>
+      {circles.map((circle, index) => (
         <div
+          key={`circle-${index}`}
           className="circle"
           style={{
             left: circle.left,
