@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Bubble } from "./components/Bubble";
-import { Loading } from "./components/Loading";
 
 const Home = () => {
   const messages = [
@@ -17,14 +16,7 @@ const Home = () => {
       loadingTime: 1500,
     },
     {
-      text: (
-        <div>
-          <div>
-            I'm currently working as a Freelancer, but looking for a more stable
-            opportunity
-          </div>
-        </div>
-      ),
+      text: " I'm currently working as a Freelancer, but looking for a more stable opportunity",
       loadingTime: 1500,
     },
     {
