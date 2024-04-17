@@ -6,8 +6,6 @@ export const DrawOnClick = () => {
   const [circles, setCircles] = useState<
     { top: number; left: number; color: string }[]
   >([]);
-  //   const canvas = document.getElementById("canvas");
-  console.log("circles", circles);
   const handleClick = (e: React.MouseEvent) => {
     var randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
